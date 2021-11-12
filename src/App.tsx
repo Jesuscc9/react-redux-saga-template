@@ -1,26 +1,40 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { Router, Switch, Route } from "react-router-dom";
+import { privateRoutes } from "../src/routes/private";
+import { createBrowserHistory } from "history";
+import Cookies from "js-cookie";
+import { Login } from "./pages";
+import { ThemeProvider } from "@mui/material";
+import { theme } from "./assets/theme";
 
-function App() {
+export const history = createBrowserHistory();
+
+export const App = () => {
+  const token = Cookies.get("authToken");
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ThemeProvider theme={theme}>
+      <Router history={history}>
+        {token && token.length > 0 ? (
+          <Switch>
+            {privateRoutes.map((route, i) => (
+              <Route
+                key={i}
+                exact
+                path={route.path}
+                component={route.component}
+              />
+            ))}
+          </Switch>
+        ) : (
+          <Switch>
+            <Route path="/" exact component={Login} />
+            <Route component={() => <p>Not found</p>} />
+            ))
+          </Switch>
+        )}
+      </Router>
+    </ThemeProvider>
   );
-}
+};
 
 export default App;
