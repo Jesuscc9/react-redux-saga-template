@@ -1,4 +1,3 @@
-import Typography from "@mui/material/Typography";
 import { Avatar, Grid, TextField, Button } from "@mui/material";
 import { useStyles } from "./styles";
 import { useFormik } from "formik";
