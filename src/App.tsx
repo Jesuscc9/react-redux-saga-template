@@ -1,39 +1,57 @@
+import { useEffect } from "react";
 import { Router, Switch, Route } from "react-router-dom";
 import { privateRoutes } from "../src/routes/private";
 import { createBrowserHistory } from "history";
 import Cookies from "js-cookie";
 import { Login } from "./pages";
-import { ThemeProvider } from "@mui/material";
-import { theme } from "./assets/theme";
+import { useSelector, useDispatch } from "react-redux";
+import { authActions, RootStateType, alertActions } from "./store";
+import { Alerts } from "./components";
 
 export const history = createBrowserHistory();
 
 export const App = () => {
-  const token = Cookies.get("authToken");
+  const token = Cookies.get("auth");
+
+	const isAuth = useSelector((state: RootStateType) => state.auth.isAuth);
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(authActions.me());
+
+    setTimeout(() => {
+      dispatch(alertActions.newAlert({ type: "error", message: "hola"}));
+    }, 3000)
+
+    setTimeout(() => {
+      dispatch(alertActions.newAlert({ type: "info", message: "informndo"}));
+    }, 5000)
+  }, [])
 
   return (
-    <ThemeProvider theme={theme}>
-      <Router history={history}>
-        {token && token.length > 0 ? (
-          <Switch>
-            {privateRoutes.map((route, i) => (
-              <Route
-                key={i}
-                exact
-                path={route.path}
-                component={route.component}
-              />
-            ))}
-          </Switch>
-        ) : (
-          <Switch>
-            <Route path="/" exact component={Login} />
-            <Route component={() => <p>Not found</p>} />
-            ))
-          </Switch>
-        )}
-      </Router>
-    </ThemeProvider>
+    <Router history={history}>
+      <Alerts />
+      { (isAuth) || (token && token.length > 0) ? (
+        <Switch>
+          {privateRoutes.map((route, i) => (
+            <Route
+              key={i}
+              exact
+              path={route.path}
+              component={route.component}
+            />
+          ))}
+          <Route component={() => <p>Not found</p>} />
+        </Switch>
+      ) : (
+        <Switch>
+          <Route exact path="/" component={Login} />
+          <Route component={() => <p>Not found</p>} />
+          ))
+        </Switch>
+      )}
+    </Router>
   );
 };
 

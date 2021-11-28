@@ -5,10 +5,10 @@ interface UserCredentials {
 	password: string,
 }
 
-const { BASE_URL } = process.env;
+const { REACT_APP_API_URL } = process.env;
 
 export class AuthService {
 	login = async (credentials: UserCredentials) => {
-		return await axios.post(`${BASE_URL}/signin`, credentials);
+		return await axios.post(`${REACT_APP_API_URL}/signin`, credentials);
 	}
 }

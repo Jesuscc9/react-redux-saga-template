@@ -1,3 +1,77 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Shippori+Antique+B1&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
+
+*{
+	font-family: "Roboto", sans-serif;
+}
+
+h1{
+	font-family: 'Lato', sans-serif;
+	font-weight: 700;
+}
+
+h2{
+	font-family: 'Shippori Antique B1', sans-serif;
+}
+
+.form-width{
+	width: 540px;
+	max-width: 95%;
+}
+
+@layer base{
+
+	.form{
+		@apply form-width mx-auto flex-col rounded-lg border border-gray-200 shadow-sm
+	}
+
+	.input-label{
+		@apply block font-medium text-gray-700 my-2
+	}
+
+	.icon{
+		@apply text-gray-600 w-auto p-2
+	}
+
+	.input-contained{
+		@apply rounded-md border-l-0 focus:ring-indigo-200 focus:border-indigo-100
+	}
+
+	.br{
+		@apply my-3
+	}
+
+	.input{
+		@apply focus:ring-indigo-200 focus:border-indigo-100 block w-full border sm:text-sm border-gray-300 rounded-md
+	}
+
+	.input-container{
+		@apply focus:ring-indigo-200 focus:border-indigo-100 w-full border sm:text-sm border-gray-300 rounded-md
+	}
+
+	.center-absolute{
+		@apply absolute left-2/4 top-2/4 transform -translate-x-1/2 -translate-y-1/2 md:-translate-y-3/4
+	}
+
+	.center-content{
+		@apply grid place-items-center
+	}
+
+	.center-content-x{
+		@apply flex justify-center
+	}
+
+	.center-content-y{
+		@apply flex items-center
+	}
+
+	.btn-primary{
+		@apply py-2 px-4 bg-blue-500 w-auto text-white rounded-lg transition-colors hover:bg-blue-600
+	}
+
+}

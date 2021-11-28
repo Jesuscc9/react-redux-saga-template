@@ -1,5 +1,7 @@
 import { ComponentType } from "react";
-import { Redirect } from "react-router-dom";
+import { Redirect } from "react-router";
+
+import { Menu } from "../pages"
 
 interface Route {
   name: string;
@@ -14,15 +16,13 @@ export const privateRoutes: Route[] = [
     path: "/",
     to: "/",
     component: () => {
-      return <Redirect to="/menu" />
+      return <Redirect to="/menu"/>
     },
   },
   {
     name: "Menu",
     path: "/menu",
     to: "/menu",
-    component: () => {
-      return <Redirect to="/menu" />
-    }
+    component: Menu
   },
 ];
