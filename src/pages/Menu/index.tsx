@@ -5,7 +5,7 @@ export const Menu = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    console.log("Estamos en menu")
+    
   }, [])
 
   return (

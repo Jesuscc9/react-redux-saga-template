@@ -19,14 +19,6 @@ export const App = () => {
 
   useEffect(() => {
     dispatch(authActions.me());
-
-    setTimeout(() => {
-      dispatch(alertActions.newAlert({ type: "error", message: "hola"}));
-    }, 3000)
-
-    setTimeout(() => {
-      dispatch(alertActions.newAlert({ type: "info", message: "informndo"}));
-    }, 5000)
   }, [])
 
   return (
