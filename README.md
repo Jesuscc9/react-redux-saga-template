@@ -1,1 +1,1 @@
-App with the purpose to update the camera app but now with react
+Common starter template for redux-saga react projects
